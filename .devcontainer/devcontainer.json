@@ -10,21 +10,24 @@
     },
     "ghcr.io/devcontainers/features/github-cli:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/sshd:1": {
+      "version": "latest"
     }
   },
   "postAttachCommand": {
-    "public": "gh codespace ports visibility 443:public -c $CODESPACE_NAME",
-    "xray": "sudo /usr/local/bin/xray -c /etc/config.json"
+    "setup-xray": "tmux has-session -t ghtun 2>/dev/null || tmux new-session -d -s ghtun 'sudo /usr/local/bin/xray -c /etc/config.json'; gh codespace ports visibility 443:public -c $CODESPACE_NAME"
   },
   "portsAttributes": {
     "443": {
       "label": "xray",
-      "protocol": "http",
+      "protocol": "https",
       "onAutoForward": "silent"
     }
   },
   "forwardPorts": [443],
   "hostRequirements": {
     "cpus": 2
-  }
+  },
+  "remoteUser": "root"
 }
