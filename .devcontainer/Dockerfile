@@ -5,7 +5,7 @@ COPY install.sh /app/install.sh
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash git curl wget unzip tzdata openssl ca-certificates \
+    bash git curl wget unzip tzdata openssl ca-certificates tmux\
     && rm -rf /var/lib/apt/lists/*
 
 RUN chmod +x /app/install.sh && /app/install.sh
